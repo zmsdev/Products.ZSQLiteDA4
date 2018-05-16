@@ -34,7 +34,7 @@ def manage_DataSources():
             The Zope SQLite Database Adapter requires the
             existence of the directory, <code>%s</code>.  This
             exists, but is not a directory.
-            """ % data_dir)
+            """ % standard.data_dir)
 
     return map(
         lambda d: (d,''),
@@ -70,7 +70,7 @@ class DB(Shared.DC.ZRDB.THUNK.THUNKED_TM):
     def open(self):
         connection = self.connection
         if connection != ':memory:':
-            connection = os.path.join(data_dir, connection)
+            connection = os.path.join(standard.data_dir, connection)
         self.db = sqlite3.connect(connection, check_same_thread = False)
         self.opened=DateTime()
 
@@ -92,7 +92,7 @@ class DB(Shared.DC.ZRDB.THUNK.THUNKED_TM):
         result=[]
         for qs in queries:
             if self.page_charset:
-                qs = unicode(qs, self.page_charset)
+                qs = str(qs.encode(),self.page_charset)
             c.execute(qs)
             d=c.description
             if d is None: continue
@@ -134,7 +134,7 @@ class DB(Shared.DC.ZRDB.THUNK.THUNKED_TM):
                 rs = []
                 for item in r:
                     try:
-                        rs.append(item.encode(self.page_charset, 'ignore'))
+                        rs.append(str(item.encode(),self.page_charset))
                     except:
                         rs.append(item)
                 conv_result.append(rs)
