@@ -21,8 +21,8 @@ from App.special_dtml import HTMLFile
 from threading import Lock
 import Shared.DC.ZRDB.Connection
 from . import db
+from . import standard
 from . import DABase
-from . import ThreadLock
 _Connection=Shared.DC.ZRDB.Connection.Connection
 
 _connections={}
@@ -72,6 +72,9 @@ class Connection(DABase.Connection):
         else:
             s="%s (<font color=red> not connected</font>)" % s
         return s
+
+    def data_dir(self):
+        return standard.data_dir
 
     def connect(self,s):
         _connections_lock.acquire()
