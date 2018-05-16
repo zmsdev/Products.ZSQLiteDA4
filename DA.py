@@ -18,6 +18,7 @@ __version__='$Revision: 1.10 $'[11:-2]
 
 import sys
 from App.special_dtml import HTMLFile
+from threading import Lock
 import Shared.DC.ZRDB.Connection
 from . import db
 from . import DABase
@@ -25,7 +26,7 @@ from . import ThreadLock
 _Connection=Shared.DC.ZRDB.Connection.Connection
 
 _connections={}
-_connections_lock=ThreadLock.allocate_lock()
+_connections_lock=Lock()
 
 data_sources=db.manage_DataSources
 
