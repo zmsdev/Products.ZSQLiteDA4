@@ -27,7 +27,7 @@ def read(*rnames):
 setup(name=NAME,
       version=read('version.txt').strip(),
       description='The ZSQLiteDA product provides support for SQLite database adapter objects in Zope.',
-      long_description=read('README.rst'),
+      long_description=read('README.md'),
       classifiers=[
         "Development Status :: 6 - Mature",
         "Environment :: Web Environment",
