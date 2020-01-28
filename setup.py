@@ -63,6 +63,7 @@ setup(name=NAME,
         'setuptools >36',
         'six',
         'Zope >= 4',
+        'Products.ZSQLMethods',
         ],
       extras_require={
         'exportimport': ['Products.GenericSetup > 2'],
